@@ -6,8 +6,32 @@
 import { defineMessages } from 'react-intl';
 
 export default defineMessages({
-  header: {
-    id: 'app.components.HomePage.header',
-    defaultMessage: 'This is HomePage component!',
+  headerNavEntryProducts: {
+    id: 'app.components.HomePage.header.nav.products',
+    defaultMessage: 'Products',
+  },
+  headerNavEntryDocumentation: {
+    id: 'app.components.HomePage.header.nav.documentation',
+    defaultMessage: 'Documentation',
+  },
+  contentKeyMessage: {
+    id: 'app.components.HomePage.content.keymessage',
+    defaultMessage: `On this Open Industry Cloud Platform, reuse best in class business functionality developed in 1000s of hours with a single api call.`,
+  },
+  contentActionButton: {
+    id: 'app.components.HomePage.content.actionbutton',
+    defaultMessage: `Limited Beta invites available.`,
+  },
+  contentPoductsHeading: {
+    id: 'app.components.HomePage.content.productheading',
+    defaultMessage: `Products and Services`,
+  },
+  poductsSubHeadingServices: {
+    id: 'app.components.HomePage.content.servicessubheading',
+    defaultMessage: `Services`,
+  },
+  poductsSubHeadingPlatform: {
+    id: 'app.components.HomePage.content.platformsubheading',
+    defaultMessage: `Platform`,
   },
 });

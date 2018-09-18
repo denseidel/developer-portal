@@ -35,4 +35,8 @@ export default defineMessages({
     id: 'app.components.HomePage.content.platformsubheading',
     defaultMessage: `Platform`,
   },
+  footer: {
+    id: 'app.components.HomePage.footer',
+    defaultMessage: `Zealous © 2018`,
+  },
 });

@@ -130,7 +130,9 @@ export class Home extends React.Component {
               </Col>
             </Row>
           </Content>
-          <Footer style={{ textAlign: 'center' }}>Zealous © 2018</Footer>
+          <Footer style={{ textAlign: 'center' }}>
+            <FormattedMessage {...messages.footer} />
+          </Footer>
         </Layout>
       </div>
     );

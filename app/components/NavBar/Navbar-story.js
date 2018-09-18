@@ -1,8 +1,7 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 import NavBar from './index';
-// import logo from '../../containers/App/logo.svg';
-const logo = null;
+import logo from '../../images/logo.svg';
 
 storiesOf('NavBar', module)
   .add('authenticated new', () => {

@@ -5,18 +5,22 @@ import { initialState } from './reducer';
  * Direct selector to the home state domain
  */
 
-const selectHomeDomain = state => state.get('home', initialState);
-
 /**
  * Other specific selectors
  */
-
+// const selectProducts = state => state.get('home', initialState);
+const selectProducts = state => state.getIn(['home', 'products'], initialState);
 /**
  * Default selector used by Home
  */
+const makeSelectServices = () =>
+  createSelector(selectProducts, products =>
+    products.filter(product => product.type === 'services'),
+  );
 
-const makeSelectHome = () =>
-  createSelector(selectHomeDomain, substate => substate.toJS());
+const makeSelectPlatform = () =>
+  createSelector(selectProducts, products =>
+    products.filter(product => product.type === 'platform'),
+  );
 
-export default makeSelectHome;
-export { selectHomeDomain };
+export { makeSelectPlatform, makeSelectServices, selectProducts };

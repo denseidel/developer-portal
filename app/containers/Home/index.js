@@ -5,7 +5,6 @@
  */
 
 import React from 'react';
-import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Helmet } from 'react-helmet';
 import { FormattedMessage } from 'react-intl';
@@ -15,7 +14,8 @@ import { Menu, Layout, Button, Row, Col, List, Icon } from 'antd';
 
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
-import makeSelectHome from './selectors';
+import { login, loadProducts } from './actions';
+import { makeSelectPlatform, makeSelectServices } from './selectors';
 import reducer from './reducer';
 import saga from './saga';
 import messages from './messages';
@@ -26,6 +26,10 @@ const { Header, Content, Footer } = Layout;
 
 /* eslint-disable react/prefer-stateless-function */
 export class Home extends React.Component {
+  componentDidMount() {
+    this.props.loadProducts();
+  }
+
   render() {
     const defaultSelected = ['Products'];
     const authenticated = true;
@@ -139,17 +143,19 @@ export class Home extends React.Component {
   }
 }
 
-Home.propTypes = {
-  dispatch: PropTypes.func.isRequired,
-};
-
 const mapStateToProps = createStructuredSelector({
-  home: makeSelectHome(),
+  services: makeSelectServices(),
+  platform: makeSelectPlatform(),
 });
 
 function mapDispatchToProps(dispatch) {
   return {
-    dispatch,
+    loadProducts: () => {
+      dispatch(loadProducts());
+    },
+    onLoginClick: () => {
+      dispatch(login());
+    },
   };
 }
 

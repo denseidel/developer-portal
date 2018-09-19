@@ -66,6 +66,7 @@ export class Home extends React.Component {
               </Col>
               <Col span={1}>
                 <Button
+                  onClick={() => this.props.onLoginClick()}
                   type={authenticated ? 'primary' : 'default'}
                   shape="circle"
                   icon={authenticated ? 'logout' : 'login'}

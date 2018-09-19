@@ -5,7 +5,11 @@
  */
 
 import { fromJS } from 'immutable';
-import { DEFAULT_ACTION, LOAD_PRODUCTS_SUCCEEDED } from './constants';
+import {
+  DEFAULT_ACTION,
+  LOAD_PRODUCTS_SUCCEEDED,
+  LOGIN_SUCCEEDED,
+} from './constants';
 
 export const initialState = fromJS({});
 
@@ -15,6 +19,8 @@ function homeReducer(state = initialState, action) {
       return state;
     case LOAD_PRODUCTS_SUCCEEDED:
       return state.set('products', action.products);
+    case LOGIN_SUCCEEDED:
+      return state.setIn(['user', 'auth'], true);
     default:
       return state;
   }

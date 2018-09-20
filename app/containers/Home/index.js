@@ -14,7 +14,7 @@ import { Menu, Layout, Button, Row, Col, List, Icon } from 'antd';
 
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
-import { login, loadProducts } from './actions';
+import { login, loadProducts, checkLogin } from './actions';
 import {
   makeSelectPlatform,
   makeSelectServices,
@@ -31,6 +31,7 @@ const { Header, Content, Footer } = Layout;
 /* eslint-disable react/prefer-stateless-function */
 export class Home extends React.Component {
   componentDidMount() {
+    this.props.checkLogin();
     this.props.loadProducts();
   }
 
@@ -162,6 +163,9 @@ function mapDispatchToProps(dispatch) {
     },
     onLoginClick: () => {
       dispatch(login());
+    },
+    checkLogin: () => {
+      dispatch(checkLogin());
     },
   };
 }

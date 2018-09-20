@@ -8,6 +8,7 @@ import {
   LOGIN,
   LOAD_PRODUCTS,
   LOAD_PRODUCTS_SUCCEEDED,
+  CHECK_LOGIN,
 } from './constants';
 
 function* handleLogin() {
@@ -111,6 +112,11 @@ function* handleLoadProducts() {
   yield put({ type: LOAD_PRODUCTS_SUCCEEDED, products: mock });
 }
 
+function* handleCheckLogin() {
+  yield keycloak.init({ onLoad: 'check-sso' });
+  yield put({ type: LOGIN_SUCCEEDED, payload: keycloak });
+}
+
 /**
  * Root saga manages watcher lifecycle
  */
@@ -121,4 +127,5 @@ export default function* watchHome() {
   // It will be cancelled automatically on component unmount
   yield takeLatest(LOGIN, handleLogin);
   yield takeLatest(LOAD_PRODUCTS, handleLoadProducts);
+  yield takeLatest(CHECK_LOGIN, handleCheckLogin);
 }

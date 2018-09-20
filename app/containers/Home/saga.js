@@ -1,5 +1,7 @@
 // import { take, call, put, select } from 'redux-saga/effects';
 import { put, takeLatest } from 'redux-saga/effects';
+// Import Keycloak for auth
+import { keycloak } from '../../keycloak-config';
 
 import {
   LOGIN_SUCCEEDED,
@@ -9,25 +11,9 @@ import {
 } from './constants';
 
 function* handleLogin() {
-  // use the keycloak function to redirect and login
-  // https://www.keycloak.org/docs/latest/securing_apps/index.html#_javascript_adapter
-  // https://www.npmjs.com/package/keycloak-js
-  yield put({ type: LOGIN_SUCCEEDED });
-  // keycloak.init({ onLoad: 'check-sso', checkLoginIframeInterval: 1 }).success(authenticated => {
-  //   if (keycloak.authenticated) {
-  //     sessionStorage.setItem('kctoken', keycloak.token);
-
-  //     //Updating some value in store to re-render the component
-  //     put({ type: LOGIN_SUCCEEDED, keycloak: keycloak });
-
-  //     setInterval(() => {
-  //       keycloak.updateToken(10).error(() => keycloak.logout());
-  //       sessionStorage.setItem('kctoken', keycloak.token);
-  //     }, 10000);
-  //     } else {
-  //       keycloak.login();
-  //     }
-  // });
+  // check in state if the user is authenticated and not expired otherwise redirect, get code (own saga handler?) -> get token -> update state
+  yield keycloak.init({ onLoad: 'login-required' });
+  yield put({ type: LOGIN_SUCCEEDED, payload: keycloak });
 }
 
 function* handleLoadProducts() {

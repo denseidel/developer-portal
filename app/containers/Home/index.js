@@ -15,7 +15,11 @@ import { Menu, Layout, Button, Row, Col, List, Icon } from 'antd';
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
 import { login, loadProducts } from './actions';
-import { makeSelectPlatform, makeSelectServices } from './selectors';
+import {
+  makeSelectPlatform,
+  makeSelectServices,
+  makeSelectKeycloak,
+} from './selectors';
 import reducer from './reducer';
 import saga from './saga';
 import messages from './messages';
@@ -32,7 +36,6 @@ export class Home extends React.Component {
 
   render() {
     const defaultSelected = ['Products'];
-    const authenticated = true;
     return (
       <div>
         <Helmet>
@@ -67,9 +70,11 @@ export class Home extends React.Component {
               <Col span={1}>
                 <Button
                   onClick={() => this.props.onLoginClick()}
-                  type={authenticated ? 'primary' : 'default'}
+                  type={
+                    this.props.keycloak.authenticated ? 'primary' : 'default'
+                  }
                   shape="circle"
-                  icon={authenticated ? 'logout' : 'login'}
+                  icon={this.props.keycloak.authenticated ? 'logout' : 'login'}
                 />
               </Col>
             </Row>
@@ -147,6 +152,7 @@ export class Home extends React.Component {
 const mapStateToProps = createStructuredSelector({
   services: makeSelectServices(),
   platform: makeSelectPlatform(),
+  keycloak: makeSelectKeycloak(),
 });
 
 function mapDispatchToProps(dispatch) {

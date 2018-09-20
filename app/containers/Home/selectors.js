@@ -8,8 +8,8 @@ import { initialState } from './reducer';
 /**
  * Other specific selectors
  */
-// const selectProducts = state => state.get('home', initialState);
 const selectProducts = state => state.getIn(['home', 'products'], initialState);
+const selectKeycloak = state => state.getIn(['home', 'keycloak'], initialState);
 /**
  * Default selector used by Home
  */
@@ -23,4 +23,12 @@ const makeSelectPlatform = () =>
     products.filter(product => product.type === 'platform'),
   );
 
-export { makeSelectPlatform, makeSelectServices, selectProducts };
+const makeSelectKeycloak = () =>
+  createSelector(selectKeycloak, keycloakObject => keycloakObject);
+
+export {
+  makeSelectPlatform,
+  makeSelectServices,
+  selectProducts,
+  makeSelectKeycloak,
+};

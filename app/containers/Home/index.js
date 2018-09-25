@@ -40,7 +40,10 @@ export class Home extends React.Component {
     return (
       <div>
         <Helmet>
-          <title>Home</title>
+          <title>
+            An integrated suite of cloud products, services and solutions |
+            zealous Cloud
+          </title>
           <meta name="description" content="Description of Home" />
         </Helmet>
         <Layout className="layout">
